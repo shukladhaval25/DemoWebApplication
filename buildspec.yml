@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+    install:
+        runtime-versions:
+            dotnet: 6.0
+    build:
+        commands:
+            - dotnet build -c Release DemoWebApplication.csproj
+            - dotnet test -c Release  ../DemoWebApplicationTest/DemoWebApplicationTest.csproj --logger trx --results-directory ./testresults
+reports:
+    DotnetTestExamples:
+        file-format: VisualStudioTrx
+        files:
+            - '**/*'
+        base-directory: './testresults'
